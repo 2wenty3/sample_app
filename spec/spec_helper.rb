@@ -1,3 +1,26 @@
+require 'rubygems'
+require 'spork'
+
+Spork.prefork do
+  ENV["RAILS_ENV"] ||= 'test'
+  unless defined?(Rails)
+    require File.dirname(__FILE__) + "/../config/environment"
+  end
+
+# --- Instructions ---
+# - Sort through your spec_helper file. Place as much environment loading 
+#   code that you don't normally modify during development in the 
+#   Spork.prefork block.
+# - Place the rest under Spork.each_run block
+# - Any code that is left outside of the blocks will be ran during preforking
+#   and during each_run!
+# - These instructions should self-destruct in 10 seconds.  If they don't,
+#   feel free to delete them.
+#
+
+
+
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
@@ -16,6 +39,7 @@ RSpec.configure do |config|
   # config.mock_with :mocha
   # config.mock_with :flexmock
   # config.mock_with :rr
+  config.mock_with :rspec
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -29,4 +53,13 @@ RSpec.configure do |config|
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
+  
+  ### Part of the Spork hack.
+  # Emulate initializer set_clear dependencies_hook in
+  # railties/lib/rails/application/bootstrap.rb
+  ActiveSupport::Dependencies.clear
+end
+end
+
+Spork.each_run do
 end
