@@ -15,6 +15,9 @@ end
 group :development do
 	gem 'rspec-rails'
 	gem 'sqlite3'
+	gem 'annotate', 
+	    :git => 'git://github.com/jeremyolliver/annotate_models.git', 
+	    :branch => 'rake_compatibility'
 end
 
 group :test do
@@ -41,7 +44,8 @@ gem 'jquery-rails'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano'
+
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
