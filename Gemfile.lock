@@ -158,6 +158,7 @@ DEPENDENCIES
   annotate!
   capistrano
   coffee-rails (~> 3.1.1)
+  factory_girl
   factory_girl_rails
   gravatar_image_tag (= 0.1.0)
   jquery-rails
